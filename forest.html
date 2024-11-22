@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+          
+            color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 100px;
+            width: auto;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #b12929;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .search-bar {
+            position: relative;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #af2020;
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .auth-links a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            background-color: #0056b3;
+        }
+
+        .mainbody {
+            position: relative;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .mainbody::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('login-bg.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .text {
+            text-align: center;
+            font-style: oblique;
+            text-transform: uppercase;
+            margin: 20px 0;
+        }
+
+        .gallery-container {
+            padding: 10px;
+        }
+
+        .gallery-container .responsive {
+            padding: 10px;
+            float: left;
+            width: 20%;
+        }
+
+        .gallery-container .gallery {
+            border: 1px solid #ccc;
+        }
+
+        .gallery-container .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .gallery-container .desc {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header nav {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                background-color: #333;
+                padding: 10px 0;
+            }
+
+            .header nav.active {
+                display: flex;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .gallery-container .responsive {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mainbody">
+        <header class="header">
+            <nav id="nav-links">
+                <div class="dropdown">
+                    <a href="index.html">🏠︎ Home</a>
+                    <div class="dropdown-content">
+                        <a href="birds.html">🕊️BIRDS</a>
+                        <a href="forest.html">🌲FOREST</a>
+                        <a href="animals.html">🐒ANIMALS</a>
+                        <a href="Waterfalls.html">🌊WATER-FALLS</a>
+                        <a href="flowers.html">🌼FLOWERS</a>
+                        <a href="babies.html">👶BABIES</a>
+                        <a href="fruits.html">🍓FRUITS</a>
+                        <a href="mountains.html">⛰️MOUNTAINS</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+
+            <div class="auth-links">
+                <a href="Login_page.html">Sign In</a>
+            </div>
+
+            <div class="logo">
+                <img src="logo6.png" alt="Logo">
+                <span></span> <!-- Optional text alongside the logo -->
+            </div>
+
+
+            <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+        </header>
+
+        <script>
+            function toggleMenu() {
+                document.getElementById('nav-links').classList.toggle('active');
+            }
+        </script>
+
+        <br>
+
+      
+       
+<h2 class="text">forests Gallery</h2>
+<div class="gallery-container">
+    <!-- 50 unique forest images, 10 rows of 5 images each -->
+
+    <!-- Row 1 -->
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F1.jpg">
+                <img src="IMAGES\Forest\F1.jpg" alt="forest 1">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F2.jpg">
+                <img src="IMAGES\Forest\F2.jpg" alt="forest 2">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F3.jpg">
+                <img src="IMAGES\Forest\F3.jpg" alt="forest 3">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F4.jpg">
+                <img src="IMAGES\Forest\F4.jpg" alt="forest 4">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F5.jpg">
+                <img src="IMAGES\Forest\F5.jpg" alt="forest 5">
+            </a>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!-- Row 2 -->
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F6.jpg">
+                <img src="IMAGES\Forest\F6.jpg" alt="forest 6">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F7.jpg">
+                <img src="IMAGES\Forest\F7.jpg" alt="forest 7">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F8.jpg">
+                <img src="IMAGES\Forest\F8.jpg" alt="forest 8">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F9.jpg">
+                <img src="IMAGES\Forest\F9.jpg" alt="forest 9">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F10.jpg">
+                <img src="IMAGES\Forest\F10.jpg" alt="forest 10">
+            </a>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F11.jpg">
+                <img src="IMAGES\Forest\F11.jpg" alt="forest 1">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F12.jpg">
+                <img src="IMAGES\Forest\F12.jpg" alt="forest 2">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F13.jpg">
+                <img src="IMAGES\Forest\F13.jpg" alt="forest 3">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F14.jpg">
+                <img src="IMAGES\Forest\F14.jpg" alt="forest 4">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F15.jpg">
+                <img src="IMAGES\Forest\F15.jpg" alt="forest 5">
+            </a>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!-- Row 2 -->
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F16.jpg">
+                <img src="IMAGES\Forest\F16.jpg" alt="forest 6">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F17.jpg">
+                <img src="IMAGES\Forest\F17.jpg" alt="forest 7">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F18.jpg">
+                <img src="IMAGES\Forest\F18.jpg" alt="forest 8">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F19.jpg">
+                <img src="IMAGES\Forest\F19.jpg" alt="forest 9">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F20.jpg">
+                <img src="IMAGES\Forest\F20.jpg" alt="forest 10">
+            </a>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F21.jpg">
+                <img src="IMAGES\Forest\F21.jpg" alt="forest 1">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F22.jpg">
+                <img src="IMAGES\Forest\F22.jpg" alt="forest 2">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F23.jpg">
+                <img src="IMAGES\Forest\F23.jpg" alt="forest 3">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F24.jpg">
+                <img src="IMAGES\Forest\F24.jpg" alt="forest 4">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F25.jpg">
+                <img src="IMAGES\Forest\F25.jpg" alt="forest 5">
+            </a>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!-- Row 2 -->
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F26.jpg">
+                <img src="IMAGES\Forest\F26.jpg" alt="forest 6">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F27.jpg">
+                <img src="IMAGES\Forest\F27.jpg" alt="forest 7">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F28.jpg">
+                <img src="IMAGES\Forest\F28.jpg" alt="forest 8">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F29.jpg">
+                <img src="IMAGES\Forest\F19.jpg" alt="forest 9">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F30.jpg">
+                <img src="IMAGES\Forest\F20.jpg" alt="forest 10">
+            </a>
+
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F31.jpg">
+                <img src="IMAGES\Forest\F31.jpg" alt="forest 1">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F32.jpg">
+                <img src="IMAGES\Forest\F32.jpg" alt="forest 2">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F33.jpg">
+                <img src="IMAGES\Forest\F33.jpg" alt="forest 3">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F34.jpg">
+                <img src="IMAGES\Forest\F34.jpg" alt="forest 4">
+            </a>
+
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F35.jpg">
+                <img src="IMAGES\Forest\F35.jpg" alt="forest 4">
+            </a>
+
+        </div>
+    </div>
+
+
+
+    <div class="clearfix"></div>
+
+
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F36.jpg">
+                <img src="IMAGES\Forest\F36.jpg" alt="forest 1">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F37.jpg">
+                <img src="IMAGES\Forest\F37.jpg" alt="forest 2">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F38.jpg">
+                <img src="IMAGES\Forest\F38.jpg" alt="forest 3">
+            </a>
+
+        </div>
+    </div>
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F39.jpg">
+                <img src="IMAGES\Forest\F39.jpg" alt="forest 4">
+            </a>
+
+        </div>
+    </div>
+
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_blank" href="IMAGES\Forest\F40.jpg">
+                <img src="IMAGES\Forest\F40.jpg" alt="forest 4">
+            </a>
+
+        </div>
+    </div>
+
+ <div class="clearfix"></div>
+
+
+ <div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F41.jpg">
+            <img src="IMAGES\Forest\F41.jpg" alt="forest 1">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F42.jpg">
+            <img src="IMAGES\Forest\F42.jpg" alt="forest 2">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F43.jpg">
+            <img src="IMAGES\Forest\F43.jpg" alt="forest 3">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F44.jpg">
+            <img src="IMAGES\Forest\F44.jpg" alt="forest 4">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F45.jpg">
+            <img src="IMAGES\Forest\F45.jpg" alt="forest 5">
+        </a>
+
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<!-- Row 2 -->
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F46.jpg">
+            <img src="IMAGES\Forest\F46.jpg" alt="forest 6">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F47.jpg">
+            <img src="IMAGES\Forest\F47.jpg" alt="forest 7">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F48.jpg">
+            <img src="IMAGES\Forest\F48.jpg" alt="forest 8">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F49.jpg">
+            <img src="IMAGES\Forest\F49.jpg" alt="forest 9">
+        </a>
+
+    </div>
+</div>
+<div class="responsive">
+    <div class="gallery">
+        <a target="_blank" href="IMAGES\Forest\F50.jpg">
+            <img src="IMAGES\Forest\F50.jpg" alt="forest 10">
+        </a>
+
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+   <!-- Premium Footer Section -->
+   <footer style="background-color: #222; color: #aaca1a; padding: 40px 20px; font-size: 14px;">
+    <div
+        style="display: flex; flex-wrap: wrap; justify-content: space-around; text-align: left; max-width: 1200px; margin: auto;">
+
+        <!-- Logo and About Section -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h2 style="font-size: 24px; font-weight: bold;">PIC-GALLERY</h2>
+            <p style="color: white;">MySite is your go-to source for stunning, high-quality images. Explore our galleries and find inspiration.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1; min-width: 200px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="index.html"
+                        style="color: #dd1b1b; text-decoration: none; margin: 5px 0; display: block;">🏠︎Home</a>
+                </li>
+                <li><a href="birds.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🕊️Birds</a></li>
+                
+                <li><a href="animals.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🐒Animals</a>
+                </li>
+                <li><a href="Waterfalls.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🌊Waterfalls</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div style="flex: 1; min-width: 210px; padding: 15px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Contact Us</h3>
+        <div style="color: white;">
+            <p>
+                ✉: <a href="mailto:support@PIC-GALLERY.com" style="text-decoration: none; color: inherit;">picgallery.com</a>
+           </p>
+           <p>
+               📞: <a href="https://wa.me/+94772331063" target="_blank" style="text-decoration: none; color: inherit;">+94772331063</a>
+           </p>
+           <p>
+               📌: <a href="https://www.google.com/maps/place/Kilinochchi+Don+Bosco/@9.4107774,80.4042564,17z/data=!4m14!1m7!3m6!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!2sKilinochchi+Don+Bosco!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0!3m5!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0?entry=ttu&g_ep=EgoyMDI0MTExOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: inherit;">A9 ROAD, KILINOCHCHI, LK</a>
+           </p>
+        </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Newsletter</h3>
+            <p style="color: white;">Subscribe to our PIC-GALLERY for the latest updates and exclusive offers.</p>
+            <form id="subscribeForm" style="display: flex; flex-direction: column; gap: 10px;">
+                <input type="email" id="emailInput" placeholder="Enter your email"
+                    style="padding: 10px; border-radius: 5px; border: none; width: 100%;" required>
+                <button type="submit"
+                    style="padding: 10px; border-radius: 5px; border: none; background-color: #e64444; color: #fff; cursor: pointer;">Subscribe</button>
+            </form>
+            <div id="messageBox" style="display: none; margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #228b22; border: 1px solid #228b22; border-radius: 5px; text-align: center;">
+                Subscribe SUCCESSFULL
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Links and Copyright -->
+    <div style="text-align: center; padding: 20px 0; border-top: 1px solid #444; margin-top: 20px;">
+        <p style="color: white;">Follow us on:</p>
+        <a href="https://www.facebook.com/login.php/" style="color:#d81b1b; text-decoration: none; margin: 0 10px;">Facebook</a> |
+        <a href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Twitter</a> |
+        <a href="https://www.instagram.com/accounts/login/?next=%2Flogin.php%2F&source=desktop_nav" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Instagram</a>
+        <p style="margin-top: 20px; color: white;">&copy; 2024 PIC-GALLERY. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const form = document.getElementById('subscribeForm');
+    const emailInput = document.getElementById('emailInput');
+    const messageBox = document.getElementById('messageBox');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        if (emailInput.value.trim() !== "") {
+            messageBox.style.display = 'block'; // Show the success message
+            setTimeout(() => {
+                messageBox.style.display = 'none'; // Hide the message after 3 seconds
+            }, 3000);
+            emailInput.value = ""; // Clear the email input field
+        } else {
+            alert("Please enter a valid email address.");
+        }
+    });
+</script>
+
+
+</body>
+
+</html>

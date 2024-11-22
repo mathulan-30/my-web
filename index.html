@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 30px;
+
+
+            color: #ffffff;
+        }
+
+        .logo {
+            display: left;
+            align-items: center;
+            gap: 10px;
+            /* Optional spacing between the logo and text, if any */
+        }
+
+        .logo img {
+            height: 100px;
+            /* Adjust the size as needed */
+            width: auto;
+            /* Maintain aspect ratio */
+        }
+
+
+        .header nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #4f11e2;
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #b12929;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #1416c4;
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .auth-links a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            /* Add some padding for better spacing */
+            text-decoration: none;
+            color: #ffffff;
+            /* Text color */
+            background-color: #007BFF;
+            /* Background color */
+            border-radius: 5px;
+            /* Rounded corners */
+            transition: background-color 0.3s ease;
+            /* Smooth transition for hover effect */
+        }
+
+        .auth-links a:hover {
+            text-decoration: none;
+            /* Keep text decoration consistent */
+            background-color: #0056b3;
+            /* Darker shade for hover effect */
+        }
+
+
+
+        .mainbody {
+            position: relative;
+            padding: 20px;
+            z-index: 1;
+            /* Ensure content is above the blurred background */
+        }
+
+        .mainbody::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('login-bg.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .text1 {
+            text-align: center;
+            font-style: oblique;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header nav {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                background-color: #161515;
+                padding: 20px 0;
+            }
+
+            .header nav.active {
+                display: flex;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+        }
+
+
+        div.gallery {
+            border: 1px solid #ccc;
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+            background-color: #ccc;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .responsive {
+            padding: 10px;
+
+            float: left;
+            width: 24.5%;
+
+        }
+
+        @media only screen and (max-width: 700px) {
+            .responsive {
+                width: 49.5%;
+                margin: 6px 0;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .responsive {
+                width: 100%;
+            }
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Verdana, sans-serif;
+        }
+
+        .mySlides {
+            display: inline-block;
+        }
+
+        img {
+            vertical-align: center;
+        }
+
+
+        .slideshow-container {
+            max-width: 900px;
+            position: relative;
+            margin: auto;
+        }
+
+
+        .text {
+            color: red;
+            font-size: 30px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 9px;
+            width: 100%;
+            text-align: right;
+        }
+
+
+        .numbertext {
+            color: #e64444;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #9f45d4;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+
+        @media only screen and (max-width: 300px) {
+            .text {
+                font-size: 11px
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="mainbody">
+        <header class="header">
+            <nav id="nav-links">
+                <div class="dropdown">
+                    <a href="PICTURES-COLLECTIONS.html">🏠︎ Home</a>
+                    <div class="dropdown-content">
+                        <a href="birds.html">🕊️BIRDS</a>
+                        <a href="forest.html">🌲FOREST</a>
+                        <a href="animals.html">🐒ANIMALS</a>
+                        <a href="Waterfalls.html">🌊WATER-FALLS</a>
+                        <a href="flowers.html">🌼FLOWERS</a>
+                        <a href="babies.html">👶BABIES</a>
+                        <a href="fruits.html">🍓FRUITS</a>
+                        <a href="mountains.html">⛰️MOUNTAINS</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+
+            <div class="auth-links">
+                <a href="Login_page.html">Sign In</a>
+            </div>
+
+            <div class="logo">
+                <img src="logo6.png" alt="Logo">
+                <span></span> <!-- Optional text alongside the logo -->
+            </div>
+
+
+            <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+        </header>
+
+        <script>
+            function toggleMenu() {
+                document.getElementById('nav-links').classList.toggle('active');
+            }
+        </script>
+
+        <br>
+        <h2 class="text1">PIC-COLLECTION</h2>
+
+
+
+        <div class="responsive">
+            <div class="gallery">
+                <a href="birds.html">
+                    <img src="https://t3.ftcdn.net/jpg/08/37/62/72/240_F_837627223_8Det5GuIFzFGIZ3N7M0q4nI6ApY5adEK.jpg"
+                        alt="Birds">
+                </a>
+                <div class="desc">Birds</div>
+            </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <a href="forest.html">
+                    <img src="IMAGES\Forest\F4.jpg" alt="Forest">
+                </a>
+                <div class="desc">Forest</div>
+            </div>
+        </div>
+        <div class="responsive">
+            <div class="gallery">
+                <a href="animals.html">
+                    <img src="https://burst.shopifycdn.com/photos/red-fox-sits-in-green-grassy-field.jpg?width=1000&format=pjpg&exif=0&iptc=0"
+                        alt="Animals">
+                </a>
+                <div class="desc">Animals</div>
+            </div>
+        </div>
+        <div class="responsive">
+            <div class="gallery">
+                <a href="Waterfalls.html">
+                    <img src="https://i.ytimg.com/vi/wIiri4wePAY/sddefault.jpg" alt="Waterfalls">
+                </a>
+                <div class="desc">Waterfalls</div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+
+        <div class="responsive">
+            <div class="gallery">
+                <a href="flowers.html">
+                    <img src="https://cdn.pixabay.com/photo/2014/04/14/20/11/pink-324175_640.jpg" alt="Flowers">
+                </a>
+                <div class="desc">Flowers</div>
+            </div>
+        </div>
+        <div class="responsive">
+            <div class="gallery">
+                <a href="babies.html">
+                    <img src="https://st2.depositphotos.com/7980778/11764/i/950/depositphotos_117643032-stock-photo-cute-baby-boy.jpg"
+                        alt="Babies">
+                </a>
+                <div class="desc">Babies</div>
+            </div>
+        </div>
+        <div class="responsive">
+            <div class="gallery">
+                <a href="fruits.html">
+                    <img src="https://thumbs.wbm.im/pw/small/0d96c561890f57e67837ec1540f8107f.jpg" alt="Fruits">
+                </a>
+                <div class="desc">Fruits</div>
+            </div>
+        </div>
+        <div class="responsive">
+            <div class="gallery">
+                <a href="mountains.html">
+                    <img src="https://cdn.pixabay.com/photo/2017/02/14/03/03/ama-dablam-2064522_640.jpg"
+                        alt="Mountains">
+                </a>
+                <div class="desc">Mountains</div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <hr>
+        <br>
+
+
+
+
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext"> / 4</div>
+                <a href="birds.html">
+                    <img src="IMAGES\Birds\B19.jpg" style="width:100%">
+                </a>
+                <div class="text">𝔹𝕀ℝ𝔻</div>
+            </div>
+
+
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 4</div>
+                <a href="Waterfalls.html">
+                    <img src="IMAGES\Waterfalls\w2.jpg" style="width:100%">
+                </a>
+                <div class="text">𝑾𝑨𝑻𝑬𝑹-𝑭𝑨𝑳𝑳𝑺</div>
+            </div>
+
+
+
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 4</div>
+                <a href="flowers.html">
+                    <img src="IMAGES\Flowers\S5.jpg" style="width:100%">
+                </a>
+                <div class="text">𝔽𝕃𝕆𝕎𝔼ℝ</div>
+            </div>
+
+
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 4</div>
+                <a href="animals.html">
+                    <img src="https://static.vecteezy.com/system/resources/previews/028/243/090/non_2x/cheetah-running-in-african-wild-animalgraphy-generative-ai-free-photo.jpg"
+                        style="width:100%">
+                </a>
+                <div class="text">𝐓𝐈𝐆𝐄𝐑</div>
+            </div>
+
+        </div>
+        <br>
+
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 5000);
+        }
+    </script>
+
+
+
+
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-links').classList.toggle('active');
+        }
+
+        function searchGallery() {
+            const input = document.querySelector('.search-bar input[type="text"]').value.toLowerCase();
+            const galleries = document.querySelectorAll('.gallery');
+
+            galleries.forEach(gallery => {
+                const desc = gallery.querySelector('.desc').textContent.toLowerCase();
+                if (desc.includes(input)) {
+                    gallery.parentElement.style.display = 'block';
+                } else {
+                    gallery.parentElement.style.display = 'none';
+                }
+            });
+        }
+
+        // Add an event listener to call the search function when typing
+        document.querySelector('.search-bar input[type="text"]').addEventListener('keyup', searchGallery);
+    </script>
+
+
+   <!-- Premium Footer Section -->
+   <footer style="background-color: #222; color: #aaca1a; padding: 40px 20px; font-size: 14px;">
+    <div
+        style="display: flex; flex-wrap: wrap; justify-content: space-around; text-align: left; max-width: 1200px; margin: auto;">
+
+        <!-- Logo and About Section -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h2 style="font-size: 24px; font-weight: bold;">PIC-GALLERY</h2>
+            <p style="color: white;">MySite is your go-to source for stunning, high-quality images. Explore our galleries and find inspiration.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1; min-width: 200px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="PICTURES-COLLECTIONS.html"
+                        style="color: #dd1b1b; text-decoration: none; margin: 5px 0; display: block;">🏠︎Home</a>
+                </li>
+                <li><a href="birds.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🕊️Birds</a></li>
+                
+                <li><a href="animals.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🐒Animals</a>
+                </li>
+                <li><a href="Waterfalls.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🌊Waterfalls</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div style="flex: 1; min-width: 210px; padding: 15px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Contact Us</h3>
+        <div style="color: white;">
+            <p>
+                 ✉: <a href="mailto:support@PIC-GALLERY.com" style="text-decoration: none; color: inherit;">picgallery.com</a>
+            </p>
+            <p>
+                📞: <a href="https://wa.me/+94772331063" target="_blank" style="text-decoration: none; color: inherit;">+94772331063</a>
+            </p>
+            <p>
+                📌: <a href="https://www.google.com/maps/place/Kilinochchi+Don+Bosco/@9.4107774,80.4042564,17z/data=!4m14!1m7!3m6!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!2sKilinochchi+Don+Bosco!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0!3m5!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0?entry=ttu&g_ep=EgoyMDI0MTExOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: inherit;">A9 ROAD, KILINOCHCHI, LK</a>
+            </p>
+        </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Newsletter</h3>
+            <p style="color: white;">Subscribe to our PIC-GALLERY for the latest updates and exclusive offers.</p>
+            <form id="subscribeForm" style="display: flex; flex-direction: column; gap: 10px;">
+                <input type="email" id="emailInput" placeholder="Enter your email"
+                    style="padding: 10px; border-radius: 5px; border: none; width: 100%;" required>
+                <button type="submit"
+                    style="padding: 10px; border-radius: 5px; border: none; background-color: #e64444; color: #fff; cursor: pointer;">Subscribe</button>
+            </form>
+            <div id="messageBox" style="display: none; margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #228b22; border: 1px solid #228b22; border-radius: 5px; text-align: center;">
+                Subscribe SUCCESSFULL
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Links and Copyright -->
+    <div style="text-align: center; padding: 20px 0; border-top: 1px solid #444; margin-top: 20px;">
+        <p style="color: white;">Follow us on:</p>
+        <a href="https://www.facebook.com/login.php/" style="color:#d81b1b; text-decoration: none; margin: 0 10px;">Facebook</a> |
+        <a href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Twitter</a> |
+        <a href="https://www.instagram.com/accounts/login/?next=%2Flogin.php%2F&source=desktop_nav" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Instagram</a>
+        <p style="margin-top: 20px; color: white;">&copy; 2024 PIC-GALLERY. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const form = document.getElementById('subscribeForm');
+    const emailInput = document.getElementById('emailInput');
+    const messageBox = document.getElementById('messageBox');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        if (emailInput.value.trim() !== "") {
+            messageBox.style.display = 'block'; // Show the success message
+            setTimeout(() => {
+                messageBox.style.display = 'none'; // Hide the message after 3 seconds
+            }, 3000);
+            emailInput.value = ""; // Clear the email input field
+        } else {
+            alert("Please enter a valid email address.");
+        }
+    });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>waterfallss Gallery</title>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+          
+            color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 100px;
+            width: auto;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #b12929;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .search-bar {
+            position: relative;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #af2020;
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .auth-links a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            background-color: #0056b3;
+        }
+
+        .mainbody {
+            position: relative;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .mainbody::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('login-bg.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .text {
+            text-align: center;
+            font-style: oblique;
+            text-transform: uppercase;
+            margin: 20px 0;
+        }
+
+        .gallery-container {
+            padding: 10px;
+        }
+
+        .gallery-container .responsive {
+            padding: 10px;
+            float: left;
+            width: 20%;
+        }
+
+        .gallery-container .gallery {
+            border: 1px solid #ccc;
+        }
+
+        .gallery-container .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .gallery-container .desc {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header nav {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                background-color: #333;
+                padding: 10px 0;
+            }
+
+            .header nav.active {
+                display: flex;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .gallery-container .responsive {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainbody">
+        <header class="header">
+            <nav id="nav-links">
+                <div class="dropdown">
+                    <a href="index.html">🏠︎Home</a>
+                    <div class="dropdown-content">
+                        <a href="birds.html">🕊️BIRDS</a>
+                        <a href="forest.html">🌲FOREST</a>
+                        <a href="animals.html">🐒ANIMALS</a>
+                        <a href="Waterfalls.html">🌊WATER-FALLS</a>
+                        <a href="flowers.html">🌼FLOWERS</a>
+                        <a href="babies.html">👶BABIES</a>
+                        <a href="fruits.html">🍓FRUITS</a>
+                        <a href="mountains.html">⛰️MOUNTAINS</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+
+            <div class="auth-links">
+                <a href="Login_page.html">Sign In</a>
+            </div>
+
+            <div class="logo">
+                <img src="logo6.png" alt="Logo">
+                <span></span> 
+            </div>
+
+
+            <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+        </header>
+
+        <script>
+            function toggleMenu() {
+                document.getElementById('nav-links').classList.toggle('active');
+            }
+        </script>
+
+        <br>
+
+
+
+        <h2 class="text">water-falls Gallery</h2>
+        <div class="gallery-container">
+
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w1.jpeg">
+                        <img src="IMAGES\Waterfalls\w1.jpeg" alt="waterfalls 1">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w2.jpg">
+                        <img src="IMAGES\Waterfalls\w2.jpg" alt="waterfalls 2">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w3.jpeg">
+                        <img src="IMAGES\Waterfalls\w3.jpeg" alt="waterfalls 3">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w4.jpeg">
+                        <img src="IMAGES\Waterfalls\w4.jpeg" alt="waterfalls 4">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w5.jpg">
+                        <img src="IMAGES\Waterfalls\w5.jpg" alt="waterfalls 5">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w6.jpg">
+                        <img src="IMAGES\Waterfalls\w6.jpg" alt="waterfalls 6">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w7.jpeg">
+                        <img src="IMAGES\Waterfalls\w7.jpeg" alt="waterfalls 7">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w8.jpg">
+                        <img src="IMAGES\Waterfalls\w8.jpg" alt="waterfalls 8">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w9.jpg">
+                        <img src="IMAGES\Waterfalls\w9.jpg" alt="waterfalls 9">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w10.jPG">
+                        <img src="IMAGES\Waterfalls\w10.jPG" alt="waterfalls 10">
+                    </a>
+                   
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w11.jpeg">
+                        <img src="IMAGES\Waterfalls\w11.jpeg" alt="waterfalls 11">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w12.jpg">
+                        <img src="IMAGES\Waterfalls\w12.jpg" alt="waterfalls 12">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w13.jpg">
+                        <img src="IMAGES\Waterfalls\w13.jpg" alt="waterfalls 13">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w14.jpeg">
+                        <img src="IMAGES\Waterfalls\w14.jpeg" alt="waterfalls 14">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w15.jpg">
+                        <img src="IMAGES\Waterfalls\w15.jpg" alt="waterfalls 15">
+                    </a>
+                   
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w16.jpg">
+                        <img src="IMAGES\Waterfalls\w16.jpg" alt="waterfalls 16">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w17.jpeg">
+                        <img src="IMAGES\Waterfalls\w17.jpeg" alt="waterfalls 17">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w18.jpeg">
+                        <img src="IMAGES\Waterfalls\w18.jpeg" alt="waterfalls 18">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w19.jpg">
+                        <img src="IMAGES\Waterfalls\w19.jpg" alt="waterfalls 19">
+                    </a>
+                    <div class="desc">waterfalls 19</div>
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w20.jpeg">
+                        <img src="IMAGES\Waterfalls\w20.jpeg" alt="waterfalls 20">
+                    </a>
+                   
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w21.jpeg">
+                        <img src="IMAGES\Waterfalls\w21.jpeg" alt="waterfalls 21">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w22.jpg">
+                        <img src="IMAGES\Waterfalls\w22.jpg" alt="waterfalls 22">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w23.jpg">
+                        <img src="IMAGES\Waterfalls\w23.jpg" alt="waterfalls 23">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w24.jpg">
+                        <img src="IMAGES\Waterfalls\w24.jpg" alt="waterfalls 24">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w25.jpg">
+                        <img src="IMAGES\Waterfalls\w25.jpg" alt="waterfalls 25">
+                    </a>
+                   
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w26.jpg">
+                        <img src="IMAGES\Waterfalls\w26.jpg" alt="waterfalls 26">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w27.jpg">
+                        <img src="IMAGES\Waterfalls\w27.jpg" alt="waterfalls 27">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w28.jpg">
+                        <img src="IMAGES\Waterfalls\w28.jpg" alt="waterfalls 28">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w29.jpg">
+                        <img src="IMAGES\Waterfalls\w29.jpg" alt="waterfalls 29">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w30.jpg">
+                        <img src="IMAGES\Waterfalls\w30.jpg" alt="waterfalls 30">
+                    </a>
+                   
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w31.jpg">
+                        <img src="IMAGES\Waterfalls\w31.jpg" alt="waterfalls 31">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w32.jpg">
+                        <img src="IMAGES\Waterfalls\w32.jpg" alt="waterfalls 32">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w33.jpg">
+                        <img src="IMAGES\Waterfalls\w33.jpg" alt="waterfalls 33">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w34.jpg">
+                        <img src="IMAGES\Waterfalls\w34.jpg" alt="waterfalls 34">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w35.jpg">
+                        <img src="IMAGES\Waterfalls\w35.jpg" alt="waterfalls 35">
+                    </a>
+                    <div class="desc">waterfalls 35</div>
+                </div>
+            </div>
+
+
+            <div class="clearfix"></div>
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w36.jpg">
+                        <img src="IMAGES\Waterfalls\w36.jpg" alt="waterfalls 36">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w37.jpg">
+                        <img src="IMAGES\Waterfalls\w37.jpg" alt="waterfalls 37">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w38.jpg">
+                        <img src="IMAGES\Waterfalls\w38.jpg" alt="waterfalls 38">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w39.jpg">
+                        <img src="IMAGES\Waterfalls\w39.jpg" alt="waterfalls 39">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w40.jpg">
+                        <img src="IMAGES\Waterfalls\w40.jpg" alt="waterfalls 40">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w41.jpg">
+                        <img src="IMAGES\Waterfalls\w41.jpg" alt="waterfalls 41">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w42.jpg">
+                        <img src="IMAGES\Waterfalls\w42.jpg" alt="waterfalls 42">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w43.jpg">
+                        <img src="IMAGES\Waterfalls\w43.jpg" alt="waterfalls 43">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w44.jpg">
+                        <img src="IMAGES\Waterfalls\w44.jpg" alt="waterfalls 44">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\45.jpg">
+                        <img src="IMAGES\Waterfalls\w45.jpg" alt="waterfalls 45">
+                    </a>
+                   
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w46.jpg">
+                        <img src="IMAGES\Waterfalls\w46.jpg" alt="waterfalls 46">
+                    </a>
+                    <div class="desc">waterfalls 46</div>
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w47.jpg">
+                        <img src="IMAGES\Waterfalls\w47.jpg" alt="waterfalls 47">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IIMAGES\Waterfalls\w48.jpg">
+                        <img src="IMAGES\Waterfalls\w48.jpg" alt="waterfalls 48">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w49.jpg">
+                        <img src="IMAGES\Waterfalls\w49.jpg" alt="waterfalls 49">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="IMAGES\Waterfalls\w50.jpg">
+                        <img src="IMAGES\Waterfalls\w50.jpg" alt="waterfalls 50">
+                    </a>
+                   
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+   <!-- Premium Footer Section -->
+   <footer style="background-color: #222; color: #aaca1a; padding: 40px 20px; font-size: 14px;">
+    <div
+        style="display: flex; flex-wrap: wrap; justify-content: space-around; text-align: left; max-width: 1200px; margin: auto;">
+
+        <!-- Logo and About Section -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h2 style="font-size: 24px; font-weight: bold;">PIC-GALLERY</h2>
+            <p style="color: white;">MySite is your go-to source for stunning, high-quality images. Explore our galleries and find inspiration.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1; min-width: 200px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="index.html"
+                        style="color: #dd1b1b; text-decoration: none; margin: 5px 0; display: block;">🏠︎Home</a>
+                </li>
+                <li><a href="birds.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🕊️Birds</a></li>
+                
+                <li><a href="animals.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🐒Animals</a>
+                </li>
+                <li><a href="Waterfalls.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🌊Waterfalls</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div style="flex: 1; min-width: 210px; padding: 15px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Contact Us</h3>
+        <div style="color: white;">
+            <p>
+                ✉: <a href="mailto:support@PIC-GALLERY.com" style="text-decoration: none; color: inherit;">picgallery.com</a>
+           </p>
+           <p>
+               📞: <a href="https://wa.me/+94772331063" target="_blank" style="text-decoration: none; color: inherit;">+94772331063</a>
+           </p>
+           <p>
+               📌: <a href="https://www.google.com/maps/place/Kilinochchi+Don+Bosco/@9.4107774,80.4042564,17z/data=!4m14!1m7!3m6!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!2sKilinochchi+Don+Bosco!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0!3m5!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0?entry=ttu&g_ep=EgoyMDI0MTExOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: inherit;">A9 ROAD, KILINOCHCHI, LK</a>
+           </p>
+        </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Newsletter</h3>
+            <p style="color: white;">Subscribe to our PIC-GALLERY for the latest updates and exclusive offers.</p>
+            <form id="subscribeForm" style="display: flex; flex-direction: column; gap: 10px;">
+                <input type="email" id="emailInput" placeholder="Enter your email"
+                    style="padding: 10px; border-radius: 5px; border: none; width: 100%;" required>
+                <button type="submit"
+                    style="padding: 10px; border-radius: 5px; border: none; background-color: #e64444; color: #fff; cursor: pointer;">Subscribe</button>
+            </form>
+            <div id="messageBox" style="display: none; margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #228b22; border: 1px solid #228b22; border-radius: 5px; text-align: center;">
+                Subscribe SUCCESSFULL
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Links and Copyright -->
+    <div style="text-align: center; padding: 20px 0; border-top: 1px solid #444; margin-top: 20px;">
+        <p style="color: white;">Follow us on:</p>
+        <a href="https://www.facebook.com/login.php/" style="color:#d81b1b; text-decoration: none; margin: 0 10px;">Facebook</a> |
+        <a href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Twitter</a> |
+        <a href="https://www.instagram.com/accounts/login/?next=%2Flogin.php%2F&source=desktop_nav" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Instagram</a>
+        <p style="margin-top: 20px; color: white;">&copy; 2024 PIC-GALLERY. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const form = document.getElementById('subscribeForm');
+    const emailInput = document.getElementById('emailInput');
+    const messageBox = document.getElementById('messageBox');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        if (emailInput.value.trim() !== "") {
+            messageBox.style.display = 'block'; // Show the success message
+            setTimeout(() => {
+                messageBox.style.display = 'none'; // Hide the message after 3 seconds
+            }, 3000);
+            emailInput.value = ""; // Clear the email input field
+        } else {
+            alert("Please enter a valid email address.");
+        }
+    });
+</script>
+
+</body>
+
+</html>

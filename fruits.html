@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruits Gallery</title>
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+          
+            color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 100px;
+            width: auto;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #b12929;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .search-bar {
+            position: relative;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #af2020;
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .auth-links a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007BFF;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-links a:hover {
+            background-color: #0056b3;
+        }
+
+        .mainbody {
+            position: relative;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .mainbody::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('login-bg.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .text {
+            text-align: center;
+            font-style: oblique;
+            text-transform: uppercase;
+            margin: 20px 0;
+        }
+
+        .gallery-container {
+            padding: 10px;
+        }
+
+        .gallery-container .responsive {
+            padding: 10px;
+            float: left;
+            width: 20%;
+        }
+
+        .gallery-container .gallery {
+            border: 1px solid #ccc;
+        }
+
+        .gallery-container .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .gallery-container .desc {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header nav {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                background-color: #333;
+                padding: 10px 0;
+            }
+
+            .header nav.active {
+                display: flex;
+            }
+
+            .search-bar {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .gallery-container .responsive {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mainbody">
+        <header class="header">
+            <nav id="nav-links">
+                <div class="dropdown">
+                    <a href="index.html">🏠︎ Home</a>
+                    <div class="dropdown-content">
+                        <a href="birds.html">🕊️BIRDS</a>
+                        <a href="forest.html">🌲FOREST</a>
+                        <a href="animals.html">🐒ANIMALS</a>
+                        <a href="Waterfalls.html">🌊WATER-FALLS</a>
+                        <a href="flowers.html">🌼FLOWERS</a>
+                        <a href="babies.html">👶BABIES</a>
+                        <a href="fruits.html">🍓FRUITS</a>
+                        <a href="mountains.html">⛰️MOUNTAINS</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </div>
+
+            <div class="auth-links">
+                <a href="Login_page.html">Sign In</a>
+            </div>
+
+            <div class="logo">
+                <img src="logo6.png" alt="Logo">
+                <span></span> <!-- Optional text alongside the logo -->
+            </div>
+
+
+            <div class="menu-btn" onclick="toggleMenu()">&#9776;</div>
+        </header>
+
+        <script>
+            function toggleMenu() {
+                document.getElementById('nav-links').classList.toggle('active');
+            }
+        </script>
+
+
+        <br>
+
+
+        <h2 class="text">Fruits Gallery</h2>
+        <div class="gallery-container">
+
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T1.jpg">
+                        <img src="Images/Fruits/T1.jpg" alt="Fruit 1">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T2.jpg">
+                        <img src="Images/Fruits/T2.jpg" alt="Fruit 2">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T3.jpg">
+                        <img src="Images/Fruits/T3.jpg" alt="Fruit 3">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T4.jpg">
+                        <img src="Images/Fruits/T4.jpg" alt="Fruit 4">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T5.jpg">
+                        <img src="Images/Fruits/T5.jpg" alt="Fruit 5">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T6.jpg">
+                        <img src="Images/Fruits/T6.jpg" alt="Fruit 6">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T7.jpg">
+                        <img src="Images/Fruits/T7.jpg" alt="Fruit 7">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T8.jpg">
+                        <img src="Images/Fruits/T8.jpg" alt="Fruit 8">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T9.jpg">
+                        <img src="Images/Fruits/T9.jpg" alt="Fruit 9">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T10.jpg">
+                        <img src="Images/Fruits/T10.jpg" alt="Fruit 10">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T11.jpg">
+                        <img src="Images/Fruits/T11.jpg" alt="Fruit 11">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T12.jpg">
+                        <img src="Images/Fruits/T12.jpg" alt="Fruit 12">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T13.jpg">
+                        <img src="Images/Fruits/T13.jpg" alt="Fruit 13">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T14.jpg">
+                        <img src="Images/Fruits/T14.jpg" alt="Fruit 14">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T15.jpg">
+                        <img src="Images/Fruits/T15.jpg" alt="Fruit 15">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T16.jpg">
+                        <img src="Images/Fruits/T16.jpg" alt="Fruit 16">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T17.jpg">
+                        <img src="Images/Fruits/T17.jpg" alt="Fruit 17">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T18.jpg">
+                        <img src="Images/Fruits/T18.jpg" alt="Fruit 18">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T19.jpg">
+                        <img src="Images/Fruits/T19.jpg" alt="Fruit 19">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T20.jpg">
+                        <img src="Images/Fruits/T20.jpg" alt="Fruit 20">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T21.jpg">
+                        <img src="Images/Fruits/T21.jpg" alt="Fruit 21">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T22.jpg">
+                        <img src="Images/Fruits/T22.jpg" alt="Fruit 22">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T23.jpg">
+                        <img src="Images/Fruits/T23.jpg" alt="Fruit 23">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T24.jpg">
+                        <img src="Images/Fruits/T24.jpg" alt="Fruit 24">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T25.jpg">
+                        <img src="Images/Fruits/T25.jpg" alt="Fruit 25">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T26.jpg">
+                        <img src="Images/Fruits/T26.jpg" alt="Fruit 26">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T27.jpg">
+                        <img src="Images/Fruits/T27.jpg" alt="Fruit 27">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T28.jpg">
+                        <img src="Images/Fruits/T28.jpg" alt="Fruit 28">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T29.jpg">
+                        <img src="Images/Fruits/T29.jpg" alt="Fruit 29">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T30.jpg">
+                        <img src="Images/Fruits/T30.jpg" alt="Fruit 30">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <!-- Row 7 -->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T31.jpg">
+                        <img src="Images/Fruits/T31.jpg" alt="Fruit 31">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T32.jpg">
+                        <img src="Images/Fruits/T32.jpg" alt="Fruit 32">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T33.jpg">
+                        <img src="Images/Fruits/T33.jpg" alt="Fruit 33">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T34.jpg">
+                        <img src="Images/Fruits/T34.jpg" alt="Fruit 34">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T35.jpg">
+                        <img src="Images/Fruits/T35.jpg" alt="Fruit 35">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <!-- Row 8 -->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T36.jpg">
+                        <img src="Images/Fruits/T36.jpg" alt="Fruit 36">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T37.jpg">
+                        <img src="Images/Fruits/T37.jpg" alt="Fruit 37">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T38.jpg">
+                        <img src="Images/Fruits/T38.jpg" alt="Fruit 38">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T39.jpg">
+                        <img src="Images/Fruits/T39.jpg" alt="Fruit 39">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T40.jpg">
+                        <img src="Images/Fruits/T40.jpg" alt="Fruit 40">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <!-- Row 9 -->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T41.jpg">
+                        <img src="Images/Fruits/T41.jpg" alt="Fruit 41">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T42.jpg">
+                        <img src="Images/Fruits/T42.jpg" alt="Fruit 42">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T43.jpg">
+                        <img src="Images/Fruits/T43.jpg" alt="Fruit 43">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T44.jpg">
+                        <img src="Images/Fruits/T44.jpg" alt="Fruit 44">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T45.jpg">
+                        <img src="Images/Fruits/T45.jpg" alt="Fruit 45">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <!-- Row 10 -->
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T46.jpg">
+                        <img src="Images/Fruits/T46.jpg" alt="Fruit 46">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T47.jpg">
+                        <img src="Images/Fruits/T47.jpg" alt="Fruit 47">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T48.jpg">
+                        <img src="Images/Fruits/T48.jpg" alt="Fruit 48">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T49.jpg">
+                        <img src="Images/Fruits/T49.jpg" alt="Fruit 49">
+                    </a>
+
+                </div>
+            </div>
+            <div class="responsive">
+                <div class="gallery">
+                    <a target="_blank" href="Images/Fruits/T50.jpg">
+                        <img src="Images/Fruits/T50.jpg" alt="Fruit 50">
+                    </a>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+</body>
+
+
+   <!-- Premium Footer Section -->
+   <footer style="background-color: #222; color: #aaca1a; padding: 40px 20px; font-size: 14px;">
+    <div
+        style="display: flex; flex-wrap: wrap; justify-content: space-around; text-align: left; max-width: 1200px; margin: auto;">
+
+        <!-- Logo and About Section -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h2 style="font-size: 24px; font-weight: bold;">PIC-GALLERY</h2>
+            <p style="color: white;">MySite is your go-to source for stunning, high-quality images. Explore our galleries and find inspiration.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="flex: 1; min-width: 200px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="index.html"
+                        style="color: #dd1b1b; text-decoration: none; margin: 5px 0; display: block;">🏠︎Home</a>
+                </li>
+                <li><a href="birds.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🕊️Birds</a></li>
+                
+                <li><a href="animals.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🐒Animals</a>
+                </li>
+                <li><a href="Waterfalls.html"
+                        style="color: blue; text-decoration: none; margin: 5px 0; display: block;">🌊Waterfalls</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div style="flex: 1; min-width: 210px; padding: 15px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Contact Us</h3>
+        <div style="color: white;">
+            <p>
+                ✉: <a href="mailto:support@PIC-GALLERY.com" style="text-decoration: none; color: inherit;">picgallery.com</a>
+           </p>
+           <p>
+               📞: <a href="https://wa.me/+94772331063" target="_blank" style="text-decoration: none; color: inherit;">+94772331063</a>
+           </p>
+           <p>
+               📌: <a href="https://www.google.com/maps/place/Kilinochchi+Don+Bosco/@9.4107774,80.4042564,17z/data=!4m14!1m7!3m6!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!2sKilinochchi+Don+Bosco!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0!3m5!1s0x3afe959d4c805ded:0x28c4cfceb2b22e40!8m2!3d9.4107774!4d80.4068313!16s%2Fg%2F11lfbjm7b0?entry=ttu&g_ep=EgoyMDI0MTExOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: inherit;">A9 ROAD, KILINOCHCHI, LK</a>
+           </p>
+        </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div style="flex: 1; min-width: 250px; padding: 10px;">
+            <h3 style="font-size: 18px; font-weight: bold;">Newsletter</h3>
+            <p style="color: white;">Subscribe to our PIC-GALLERY for the latest updates and exclusive offers.</p>
+            <form id="subscribeForm" style="display: flex; flex-direction: column; gap: 10px;">
+                <input type="email" id="emailInput" placeholder="Enter your email"
+                    style="padding: 10px; border-radius: 5px; border: none; width: 100%;" required>
+                <button type="submit"
+                    style="padding: 10px; border-radius: 5px; border: none; background-color: #e64444; color: #fff; cursor: pointer;">Subscribe</button>
+            </form>
+            <div id="messageBox" style="display: none; margin-top: 10px; padding: 10px; background-color: #e0ffe0; color: #228b22; border: 1px solid #228b22; border-radius: 5px; text-align: center;">
+                Subscribe SUCCESSFULL
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Links and Copyright -->
+    <div style="text-align: center; padding: 20px 0; border-top: 1px solid #444; margin-top: 20px;">
+        <p style="color: white;">Follow us on:</p>
+        <a href="https://www.facebook.com/login.php/" style="color:#d81b1b; text-decoration: none; margin: 0 10px;">Facebook</a> |
+        <a href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJteCI6IjIifQ%3D%3D%22%7D" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Twitter</a> |
+        <a href="https://www.instagram.com/accounts/login/?next=%2Flogin.php%2F&source=desktop_nav" style="color: #d81b1b; text-decoration: none; margin: 0 10px;">Instagram</a>
+        <p style="margin-top: 20px; color: white;">&copy; 2024 PIC-GALLERY. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const form = document.getElementById('subscribeForm');
+    const emailInput = document.getElementById('emailInput');
+    const messageBox = document.getElementById('messageBox');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        if (emailInput.value.trim() !== "") {
+            messageBox.style.display = 'block'; // Show the success message
+            setTimeout(() => {
+                messageBox.style.display = 'none'; // Hide the message after 3 seconds
+            }, 3000);
+            emailInput.value = ""; // Clear the email input field
+        } else {
+            alert("Please enter a valid email address.");
+        }
+    });
+</script>
+
+
+
+</html>

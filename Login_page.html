@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- REMIXICONS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="login.css">
+    
+    <title>Animated Login, Register, and Forgot Password Form</title>
+</head>
+<body>
+    <div class="login">
+        <img src="login-bg.png" alt="login image" class="login__img">
+        
+        <!-- Login Form -->
+        <form class="login__form" id="login-form">
+            <h1 class="login__title">Login</h1>
+            <div class="login__content">
+                <div class="login__box">
+                    <i class="ri-user-3-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="email" required class="login__input" id="login-email" placeholder=" ">
+                        <label for="login-email" class="login__label">Email</label>
+                    </div>
+                </div>
+                <div class="login__box">
+                    <i class="ri-lock-2-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="password" required class="login__input" id="login-pass" placeholder=" ">
+                        <label for="login-pass" class="login__label">Password</label>
+                        <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="login__check">
+                <div class="login__check-group">
+                    <input type="checkbox" class="login__check-input" id="login-check">
+                    <label for="login-check" class="login__check-label">Remember me</label>
+                </div>
+                <a href="#" id="toggle-forgot-password" class="login__forgot">Forgot Password?</a>
+            </div>
+            <button type="submit" class="login__button">Login</button>
+            <p class="login__register">
+                Don't have an account? <a href="#" id="toggle-register">Register</a>
+            </p>
+        </form>
+
+        <!-- Register Form -->
+        <form class="login__form" id="register-form" style="display: none;">
+            <h1 class="login__title">Register</h1>
+            <div class="login__content">
+                <div class="login__box">
+                    <i class="ri-user-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="text" required class="login__input" id="register-name" placeholder=" ">
+                        <label for="register-name" class="login__label">Full Name</label>
+                    </div>
+                </div>
+                <div class="login__box">
+                    <i class="ri-user-3-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="email" required class="login__input" id="register-email" placeholder=" ">
+                        <label for="register-email" class="login__label">Email</label>
+                    </div>
+                </div>
+                <div class="login__box">
+                    <i class="ri-lock-2-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="password" required class="login__input" id="register-pass" placeholder=" ">
+                        <label for="register-pass" class="login__label">Password</label>
+                        <i class="ri-eye-off-line login__eye" id="register-eye"></i>
+                    </div>
+                </div>
+                <div class="login__box">
+                    <i class="ri-lock-2-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="password" required class="login__input" id="register-confirm-pass" placeholder=" ">
+                        <label for="register-confirm-pass" class="login__label">Confirm Password</label>
+                        <i class="ri-eye-off-line login__eye" id="confirm-eye"></i>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="login__button">Register</button>
+            <p class="login__register">
+                Already have an account? <a href="#" id="toggle-login">Login</a>
+            </p>
+        </form>
+
+        <!-- Forgot Password Form -->
+        <form class="login__form" id="forgot-password-form" style="display: none;">
+            <h1 class="login__title">Forgot Password</h1>
+            <p class="login__text">Enter your email address to reset your password.</p>
+            <div class="login__content">
+                <div class="login__box">
+                    <i class="ri-mail-line login__icon"></i>
+                    <div class="login__box-input">
+                        <input type="email" required class="login__input" id="forgot-email" placeholder=" ">
+                        <label for="forgot-email" class="login__label">Email</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="login__button">Reset Password</button>
+            <p class="login__register">
+                Remembered? <a href="#" id="toggle-login-forgot">Login</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="login.js"></script>
+</body>
+</html>
+
+
+
+
